@@ -2,21 +2,7 @@ syntax="proto3";
 
 package service;
 
-message City{
-    string City = 1;
-}
-message State{
-    string State = 1;
 
-}
-message Country{
-    string Country = 1;
-
-}
-message Pincode{
-    int64 Pincode = 1;
-
-}
 message Category{
     string Name = 1;
     int32 ID = 2;
@@ -83,10 +69,10 @@ message User{
     string Address1 = 5;
     string Address2 = 6;
     
-    City City = 7;
-    State State = 8;
-    Country Country = 9;
-    Pincode Pincode = 10;
+    string City = 7;
+    string State = 8;
+    string Country = 9;
+    int64 Pincode = 10;
 
     Cart Cart =11;
 
@@ -99,6 +85,7 @@ message User{
     string Password = 15;
 
     repeated SuccessOrder Orders = 16;
+    string ID = 17;
 
 }
 message SignupRequest{
@@ -167,7 +154,8 @@ message CheckoutResponse{
 }
 
 message EditUserRequest{
-    User User = 1;
+    User UserBefore = 1;
+    User UserAfter = 2;
 }
 message EditUserResponse{
     User User = 1;

@@ -1,0 +1,224 @@
+syntax="proto3";
+
+package service;
+
+message City{
+    string City = 1;
+}
+message State{
+    string State = 1;
+
+}
+message Country{
+    string Country = 1;
+
+}
+message Pincode{
+    int64 Pincode = 1;
+
+}
+message Category{
+    string Name = 1;
+    int32 ID = 2;
+    repeated Category ParentCategories = 3;
+    repeated string ImagePaths = 4;
+
+    repeated Product Products = 5;
+
+}
+message VariantProduct{
+    string Name = 1;
+    Category Category = 2;
+    int32 ID= 3;
+
+    repeated string  ImagePaths = 4;
+
+    int32 UnitPrice = 5;
+    int32 MRP = 6;
+    int32 Cashback = 7;
+    string Unit = 8;
+
+    int32 MemberPrice = 9;
+}
+
+message Product{
+    string Name = 1;
+
+    repeated VariantProduct Variants = 2;
+}
+
+message Cart{
+    repeated VariantProduct Products = 1;
+    repeated int32 Quantities=2;
+    repeated string Comments = 3;
+    
+
+
+}
+
+message Order{
+    Cart Cart =1;
+    string FinalComment = 2;
+    int64 DeliveryTimeUnix =3;
+ //   string PaymentMode = 4;
+    User UserDetails = 5;
+    int32 Total = 6;
+    int32 Shipping =7;
+    int32 GrandTotal = 8;
+
+}
+
+message LoginDetails{
+    int64 TimeUnix = 1;
+    string IP = 2;
+}
+
+message User{
+    string FirstName = 1;
+    string LastName = 2;
+
+    int64 Phone = 3;
+    string Email = 4;
+    
+    string Address1 = 5;
+    string Address2 = 6;
+    
+    City City = 7;
+    State State = 8;
+    Country Country = 9;
+    Pincode Pincode = 10;
+
+    Cart Cart =11;
+
+    int32 Funds = 12;
+
+    bool Member = 13;
+
+    repeated LoginDetails LoginDetails = 14;
+
+    string Password = 15;
+
+    repeated SuccessOrder Orders = 16;
+
+}
+message SignupRequest{
+    User User =1;
+}
+
+message SignupResponse{
+    User User = 1;
+    bool Success = 2;
+}
+message LoginRequest{
+    string Email = 1;
+    string Password = 2;
+    bool ToKeepLoggedIn = 3;
+    
+}
+message LoginResponse{
+    User User = 1;
+}
+message LogoutRequest{
+    User User = 1;
+}
+message LogoutResponse{
+    bool Success = 1;
+}
+
+message AddToCartRequest{
+    VariantProduct Product = 1;
+    int32 Quantity = 2;
+    string Comments =3;
+}
+
+message AddToCartResponse{
+   
+    bool Success = 1;
+
+}
+message ReadCartRequest{
+
+}
+message ReadCartResponse{
+    Cart Cart =1;
+}
+
+message UpdateCartRequest{
+    Cart Cart = 1;
+}
+message UpdateCartResponse{
+    Cart Cart = 2;
+}
+message EmptyCartRequest{
+
+    
+
+}
+message EmptyCartResponse{
+    bool Success = 1;
+}
+
+message CheckoutRequest{
+    Cart Cart =1;
+}
+message CheckoutResponse{
+    Order Order = 1;
+    bool Success = 2;
+}
+
+message EditUserRequest{
+    User User = 1;
+}
+message EditUserResponse{
+    User User = 1;
+    bool Success = 2;
+}
+
+message PayRequest{
+    Order Order = 1;
+
+}
+
+message SuccessOrder{
+    Cart Cart =1;
+    string FinalComment = 2;
+    int64 DeliveryTimeUnix =3;
+    string PaymentMode = 4;
+    User UserDetails = 5;
+    int32 Total = 6;
+    int32 Shipping =7;
+    int32 GrandTotal = 8;
+
+    string Progress = 9;
+
+    string TrackDetails = 10;
+}
+message PayResponse{
+    Order Order = 1;
+    bool Success = 2;
+    SuccessOrder  SuccessOrder = 3;
+}
+
+
+service Ecommerce{
+    rpc Signup(SignupRequest) returns (SignupResponse);
+
+    rpc Login(LoginRequest) returns(LoginResponse);
+
+    rpc Logout(LogoutRequest) returns(LogoutResponse);
+
+    rpc AddToCart(AddToCartRequest) returns(AddToCartResponse);
+
+    rpc ReadCart(ReadCartRequest) returns(ReadCartResponse);
+
+    rpc UpdateCart(UpdateCartRequest) returns(UpdateCartResponse);
+
+    rpc EmptyCart(EmptyCartRequest) returns(EmptyCartResponse);
+
+    rpc Checkout(CheckoutRequest) returns(CheckoutResponse);
+
+    
+    rpc EditUser(EditUserRequest) returns(EditUserResponse);
+
+    rpc Pay(PayRequest) returns(PayResponse);
+}

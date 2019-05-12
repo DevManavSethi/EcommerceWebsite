@@ -75,13 +75,15 @@ func (*server) Signup(ctx context.Context, req *service.SignupRequest) (*service
 
 	pass := user.GetPassword()
 
+	//--------------------------------
 	EncryptedPass, err00 := bcrypt.GenerateFromPassword([]byte(pass), 10)
-
 	user.Password = string(EncryptedPass)
-
+	//-------------------------------
 	uuid, err000 := uuid.NewV4()
 	FatalOnError("Error ", err000)
 	user.ID = uuid.String()
+
+	//---------------------------------------------------------------------------------
 
 	mongoDBclient, err01 := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
 	FatalOnError("Error connecting to mongoDB.", err01)
@@ -91,6 +93,8 @@ func (*server) Signup(ctx context.Context, req *service.SignupRequest) (*service
 		FatalOnError("error insering in mongodb", err02)
 		return nil, err02
 	}
+
+	//------------------------------------------------------------------------------------
 	return &service.SignupResponse{
 		User: user,
 	}, nil

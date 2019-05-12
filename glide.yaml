@@ -1,0 +1,21 @@
+package: .
+import:
+- package: github.com/DevManavSethi/EcommerceWebsite
+  subpackages:
+  - service
+- package: github.com/golang/protobuf
+  subpackages:
+  - proto
+- package: github.com/satori/go.uuid
+- package: go.mongodb.org/mongo-driver
+  subpackages:
+  - bson
+  - mongo
+  - mongo/options
+- package: golang.org/x/crypto
+  subpackages:
+  - bcrypt
+- package: google.golang.org/grpc
+- package: google.golang.org/grpc/codes
+- package: google.golang.org/grpc/reflection
+- package: google.golang.org/grpc/status

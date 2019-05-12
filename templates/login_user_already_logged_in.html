@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Already logged in</title>
+    </head>
+    <body>
+        <h2>{{.FirstName}}, you are already logged in!</h2><br/>
+        <h3>Do you wish to logout and login as another user?</h3>
+
+        <button onclick="Logout()" value="Logout and signup as another user">Logout and login as another user</button>
+        <button onclick="Home()" value="Let me stay who I am!">Let me stay who I am!</button>
+
+        <script>
+        function Logout(){
+            document.cookie = "ecommerce_user= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+            window.location.href="/login";
+        }
+        
+        function Home(){
+            window.location.href="/";
+        }</script>
+    </body>
+</html>

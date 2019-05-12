@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>{{.Product.Name}}</title>
+    </head>
+
+    <body>
+        {{range .Product.ImagePaths}}
+<img src="{{.}}"/>
+        {{end}}
+        <br/>
+        <form method="POST">
+        <h1>{{.Product.Name}}</h1><br/>
+        <input type="text" name="id" value="{{.Product.ID}}" style="visibility:hidden;">
+
+        <select name="variant" onchange="ChangeProductVariant()">
+            {{range .SuperProduct.Variants}}
+<option name="{{.Unit}}">{{.Size}} {{.Unit}} Price: {{.UnitPrice}} MRP: {{.MRP}}</option>
+            {{end}}
+        </select><br/>
+        <input type="number" name="quantity" placeholder="Quantity"><br/>
+        <input type="text" name="comment" placeholder="Comments to add!"><br/>
+        <input type="submit" name="Add to Cart" value="Add to Cart"><br/>
+        
+    </form>
+
+    <script>
+    function ChangeProductVariant(){
+
+    }
+    </script>
+    </body>
+</html>

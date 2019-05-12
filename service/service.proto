@@ -14,7 +14,7 @@ message Category{
 }
 message VariantProduct{
     string Name = 1;
-    Category Category = 2;
+    int32 CategoryID = 2;
     int32 ID= 3;
 
     repeated string  ImagePaths = 4;
@@ -25,6 +25,9 @@ message VariantProduct{
     string Unit = 8;
 
     int32 MemberPrice = 9;
+
+    string MainProductName = 10;
+    float Size = 11;
 }
 
 message Product{
